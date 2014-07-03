@@ -40,6 +40,5 @@ class Ruby
     versions = text.scan /ruby-([0-9]+\.[0-9]+\.[0-9]+)/i
     flat = versions.inject([]) { |arr, obj| arr << obj[0] }.compact.uniq
     @versions = flat.collect! { |e| Versionomy.parse(e) }
-    puts @versions
   end
 end
