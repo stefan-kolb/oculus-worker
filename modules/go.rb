@@ -1,7 +1,7 @@
 require 'open-uri'
 
-# TODO
-# http://golang.org/dl/
+# GO
+# Source: http://golang.org/dl/
 class Go
   @versions
 
@@ -14,7 +14,7 @@ class Go
   end
 
   def latest_unstable
-
+    'Not supported'
   end
 
   def versions
@@ -31,10 +31,8 @@ class Go
 
   def extract
     text = download
-    versions = text.scan /go([0-9]+\.[0-9]+(\.[0-9]+)?)/
-    flat = []
-    versions.each { |v| flat << v[0] }
-    flat = flat.compact.uniq
+    versions = text.scan /go([0-9]+\.[0-9]+(\.[0-9]+)?)/i
+    flat = versions.inject([]) { |arr, obj| arr << obj[0] }.compact.uniq
     @versions = flat.collect! { |e| Versionomy.parse(e) }
   end
 end

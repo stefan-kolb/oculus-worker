@@ -1,7 +1,7 @@
 require 'versionomy'
 
-# TODO
-# http://www.erlang.org/download/
+# ERLANG
+# Source: http://www.erlang.org/download/
 class Erlang
   @versions
 
@@ -14,7 +14,7 @@ class Erlang
   end
 
   def latest_unstable
-
+    'Not supported'
   end
 
   def versions
@@ -31,10 +31,8 @@ class Erlang
 
   def extract
     text = download
-    versions = text.scan /otp_src_([0-9]+\.[0-9]+(\.[0-9]+)?)/
-    flat = []
-    versions.each { |v| flat << v[0] }
-    flat = flat.compact.uniq
+    versions = text.scan /otp_src_([0-9]+\.[0-9]+(\.[0-9]+)?)\.tar\.gz/i
+    flat = versions.inject([]) { |arr, obj| arr << obj[0] }.compact.uniq
     @versions = flat.collect! { |e| Versionomy.parse(e) }
   end
 end

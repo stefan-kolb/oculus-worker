@@ -1,15 +1,14 @@
-# TODO
-# sprachspezifikation vs sdk!
+# DART
 class Dart
-	def latest_stable
-		'1.5.0'
-	end
-	
-	def latest_unstable 
+  def latest_stable
+    '1.5.2'
+  end
 
-	end
-	
-	def versions
+  def latest_unstable
+    'Not supported'
+  end
 
-	end
+  def versions
+    'Not supported'
+  end
 end

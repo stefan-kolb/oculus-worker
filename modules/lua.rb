@@ -1,5 +1,5 @@
-# TODO
-# http://www.lua.org/ftp/
+# LUA
+# Source: http://www.lua.org/ftp/
 class Lua
   @versions
 
@@ -12,7 +12,7 @@ class Lua
   end
 
   def latest_unstable
-
+    'Not supported'
   end
 
   def versions
@@ -29,10 +29,8 @@ class Lua
 
   def extract
     text = download
-    versions = text.scan /lua-([0-9]+\.[0-9]+(\.[0-9]+)?)/
-    flat = []
-    versions.each { |v| flat << v[0] }
-    flat = flat.compact.uniq
+    versions = text.scan /lua-([0-9]+\.[0-9]+(\.[0-9]+)?)/i
+    flat = versions.inject([]) { |arr, obj| arr << obj[0] }.compact.uniq
     @versions = flat.collect! { |e| Versionomy.parse(e) }
   end
 end

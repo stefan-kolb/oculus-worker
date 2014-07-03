@@ -1,8 +1,8 @@
 require 'rest_client'
 
-# just use http://semver.io
-# source: http://nodejs.org/dist/
-# todo caching for faster responses necessary
+# NODE
+# Source: http://semver.io
+# Alt: http://nodejs.org/dist/
 class Node
 	def latest_stable
 		RestClient.get('https://semver.io/node/stable')

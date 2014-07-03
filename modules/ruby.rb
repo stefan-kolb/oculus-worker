@@ -1,8 +1,9 @@
 require 'open-uri'
 require 'zlib'
-# source: http://cache.ruby-lang.org/pub/ruby/
-# stable http://cache.ruby-lang.org/pub/ruby/stable/
-# todo caching, does this algo work everytime...
+
+# RUBY
+# Source: http://cache.ruby-lang.org/pub/ruby/
+# Alt: http://cache.ruby-lang.org/pub/ruby/stable/
 class Ruby
   @versions
 
@@ -15,7 +16,7 @@ class Ruby
   end
 
   def latest_unstable
-
+    'Not supported'
   end
 
   def versions
@@ -36,8 +37,9 @@ class Ruby
 
   def extract
     text = download
-    versions = text.scan /[0-9]+\.[0-9]+\.[0-9]+/
-    flat = versions.uniq
+    versions = text.scan /ruby-([0-9]+\.[0-9]+\.[0-9]+)/i
+    flat = versions.inject([]) { |arr, obj| arr << obj[0] }.compact.uniq
     @versions = flat.collect! { |e| Versionomy.parse(e) }
+    puts @versions
   end
 end

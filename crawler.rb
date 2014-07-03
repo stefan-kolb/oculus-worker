@@ -62,7 +62,7 @@ class Crawler
     end
   rescue Exception => e
     puts "Caught #{e.class}"
-    puts "Error package #{package}"
+    puts "Error package #{ware}"
     puts e.message
     puts e.backtrace.inspect
     # TODO send mail, works over logentries atm

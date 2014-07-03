@@ -6,10 +6,8 @@ class Runtime
   field :name, type: String
   field :revision, type: DateTime
   field :version, type: String
-  field :module, type: String
   # validation
-  #validates :url, presence: true, format: { with: /http[s]?:\/\/.*/ }
-  #validates :association, presence: true
-  #validates :source, presence: true, format: { with: /http[s]?:\/\/.*/ }
-  #validates :gender, presence: true, inclusion: { in: [ "M", "F", "X", "Y" ] }
+  validates :name, presence: true
+  validates :revision, presence: true
+  validates :version, presence: true #, format: { with: /http[s]?:\/\/.*/ }
 end

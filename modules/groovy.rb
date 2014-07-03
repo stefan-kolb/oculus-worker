@@ -1,14 +1,12 @@
 require 'json'
 require 'rest_client'
 
-# just use versioneye maven
-# source: https://www.versioneye.com/api/v2/products/java/org~codehaus~groovy~groovy?api_key=Log+in+to+get+your+own+api+token
-# versioneye nicht aktuell!
-# http://dist.codehaus.org/groovy/distributions/
-# todo caching for faster responses necessary
-# semantic versioning: [Y]
-# since v2.0.0
-# http://groovy.codehaus.org/Version+Scheme?nocache
+# GROOVY
+# Source: Versioneye
+# Alt: http://dist.codehaus.org/groovy/distributions/
+# Semantic versioning: [Y]
+# Since v2.0.0
+# http://groovy.codehaus.org/Version+Scheme
 class Groovy
 	def latest_stable
     response = RestClient.get("https://www.versioneye.com/api/v2/products/java/org~codehaus~groovy~groovy?api_key=91780ca596c2e1906a9d")
@@ -17,10 +15,10 @@ class Groovy
 	end
 	
 	def latest_unstable 
-
+    'Not supported'
 	end
 	
 	def versions
-
+    'Not supported'
 	end
 end
