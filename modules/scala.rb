@@ -6,7 +6,7 @@ require 'rest_client'
 # Alt: http://www.scala-lang.org/download/all.html
 class Scala
 	def latest_stable
-    response = RestClient.get("https://www.versioneye.com/api/v2/products/java/org~scala~lang~scala~library?api_key=91780ca596c2e1906a9d")
+    response = RestClient.get("https://www.versioneye.com/api/v2/products/java/org~scala-lang:scala-library?api_key=91780ca596c2e1906a9d")
     data = JSON.parse(response)
     data['version']
 	end
