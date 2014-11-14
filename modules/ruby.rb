@@ -2,8 +2,7 @@ require 'open-uri'
 require 'zlib'
 
 # RUBY
-# Source: http://cache.ruby-lang.org/pub/ruby/
-# Alt: http://cache.ruby-lang.org/pub/ruby/stable/
+# Source: https://github.com/ruby/ruby
 class Ruby
   @versions
 
@@ -26,19 +25,19 @@ class Ruby
   private
 
   def download
-    open('http://cache.ruby-lang.org/pub/ruby/') do |stream|
-      if (stream.content_encoding.empty?)
-        stream.read
-      else
-        Zlib::GzipReader.new(stream).read
-      end
-    end
+    response = RestClient.get('https://api.github.com/repos/ruby/ruby/tags')
+    JSON.parse(response)
   end
 
   def extract
-    text = download
-    versions = text.scan /ruby-([0-9]+\.[0-9]+\.[0-9]+)/i
-    flat = versions.inject([]) { |arr, obj| arr << obj[0] }.compact.uniq
-    @versions = flat.collect! { |e| Versionomy.parse(e) }
+    json = download
+    arr = []
+    json.each do |tag|
+      match = /v([0-9]+.[0-9]+.[0-9]+)(.[0-9]{3}|$)/.match(tag['name'])
+      v, p = match.captures unless match.nil?
+      arr << ( v.gsub('_', '.') << p.gsub('_', 'p') unless p.nil? )
+    end
+    arr = arr.compact.uniq
+    @versions = arr.collect! { |e| Versionomy.parse(e) }
   end
 end
