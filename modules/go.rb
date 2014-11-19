@@ -31,7 +31,7 @@ class Go
 
   def extract
     text = download
-    versions = text.scan /go([0-9]+\.[0-9]+(\.[0-9]+)?)/i
+    versions = text.scan /go([0-9]+\.[0-9]+(\.[0-9]+)?$)/i
     flat = versions.inject([]) { |arr, obj| arr << obj[0] }.compact.uniq
     @versions = flat.collect! { |e| Versionomy.parse(e) }
   end
