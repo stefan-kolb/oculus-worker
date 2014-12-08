@@ -1,11 +1,12 @@
 require 'open-uri'
 
 # GO
-# Source: http://golang.org/dl/
+# Source: https://github.com/golang/go/
 class Go
   @versions
 
   def initialize
+    @versions = []
     extract
   end
 
@@ -23,16 +24,26 @@ class Go
 
   private
 
-  def download
-    open('http://golang.org/dl/') do |stream|
-      stream.read
-    end
+  def download page
+    response = RestClient.get("https://api.github.com/repos/golang/go/tags?page=#{page}")
+    JSON.parse(response)
   end
 
   def extract
-    text = download
-    versions = text.scan /go([0-9]+\.[0-9]+(\.[0-9]+)?$)/i
-    flat = versions.inject([]) { |arr, obj| arr << obj[0] }.compact.uniq
-    @versions = flat.collect! { |e| Versionomy.parse(e) }
+    (1..10).each do |i|
+      json = download i
+
+      break if json.empty?
+
+      arr = []
+      json.each do |tag|
+        match = /go([0-9]+\.[0-9]+(\.[0-9]+)?)$/.match(tag['name'])
+        v, p = match.captures unless match.nil?
+        arr << v
+      end
+      arr = arr.compact.uniq
+      arr.collect! { |e| Versionomy.parse(e) }
+      @versions= @versions + arr
+    end
   end
 end
