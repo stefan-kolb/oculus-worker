@@ -25,7 +25,7 @@ class Crawler
     stop = Time.new
     time = stop - start
     puts 'Finished complete crawl!'
-    puts "Count: #{Runtime.count}. Processing time was #{time}."
+    puts "Count: #{Profiles::Runtime.count}. Processing time was #{time}."
   end
 
   private
@@ -36,10 +36,10 @@ class Crawler
     if result.blank?
       raise "Empty version result for #{result.class.name}!"
     else
-      package = Runtime.where(name: ware)
+      package = Profiles::Runtime.where(name: ware)
 
       if package.blank?
-        Runtime.create(
+        Profiles::Runtime.create(
             name: ware,
             version: result,
             revision: DateTime.now
