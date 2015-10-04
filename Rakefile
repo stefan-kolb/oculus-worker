@@ -6,6 +6,7 @@ require_relative 'models/runtime'
 require_relative 'crawler'
 
 Mongoid.load!('config/mongoid.yml')
+Mongo::Logger.logger.level = ::Logger::INFO
 
 # crawling
 namespace :crawler do

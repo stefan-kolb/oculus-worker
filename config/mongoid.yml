@@ -1,11 +1,11 @@
 development:
-  sessions:
+  clients:
     default:
       database: paas
       hosts:
           - 127.0.0.1:27017
 
 production:
-  sessions:
+  clients:
     default:
-      uri: <%= ENV['MONGOHQ_URL'] %>
+      uri: <%= ENV['MONGO_URL'] %>

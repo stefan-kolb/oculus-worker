@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
-ruby '2.0.0'
+ruby '2.2.2'
 
-gem 'mongoid', '~> 4.0'
+gem 'mongoid', '~> 5.0'
 gem 'rufus-scheduler'
 gem 'require_all'
 gem 'rest-client'
