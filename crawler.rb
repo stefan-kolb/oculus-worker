@@ -3,7 +3,7 @@ require 'mongoid'
 require 'require_all'
 
 require_relative 'config/openssl'
-require_relative 'models/runtime'
+require_relative 'models/runtime_version'
 
 require_all 'modules'
 
@@ -25,7 +25,7 @@ class Crawler
     stop = Time.new
     time = stop - start
     puts 'Finished complete crawl!'
-    puts "Count: #{Profiles::Runtime.count}. Processing time was #{time}."
+    puts "Count: #{Profiles::RuntimeVersion.count}. Processing time was #{time}."
   end
 
   private
@@ -36,10 +36,10 @@ class Crawler
     if result.blank?
       raise "Empty version result for #{result.class.name}!"
     else
-      package = Profiles::Runtime.where(name: ware)
+      package = Profiles::RuntimeVersion.where(name: ware)
 
       if package.blank?
-        Profiles::Runtime.create(
+        Profiles::RuntimeVersion.create(
             name: ware,
             version: result,
             revision: DateTime.now

@@ -2,7 +2,7 @@ require 'json'
 require 'mongoid'
 require 'rake/testtask'
 
-require_relative 'models/runtime'
+require_relative 'models/runtime_version'
 require_relative 'crawler'
 
 Mongoid.load!('config/mongoid.yml')
