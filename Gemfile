@@ -7,7 +7,8 @@ gem 'rufus-scheduler'
 gem 'require_all'
 gem 'rest-client'
 gem 'versionomy'
+gem 'rake'
 
 group :test do
-	gem 'minitest'
+  gem 'minitest'
 end
