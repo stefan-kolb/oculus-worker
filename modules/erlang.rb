@@ -24,9 +24,7 @@ class Erlang
   private
 
   def download
-    open('http://www.erlang.org/download/') do |stream|
-      stream.read
-    end
+    open('http://www.erlang.org/download/', &:read)
   end
 
   def extract

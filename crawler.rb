@@ -40,14 +40,14 @@ class Crawler
 
       if package.blank?
         Profiles::RuntimeVersion.create(
-            name: ware,
-            version: result,
-            revision: DateTime.now
+          name: ware,
+          version: result,
+          revision: DateTime.now
         )
       else
         package.update(
-            version: result,
-            revision: DateTime.now
+          version: result,
+          revision: DateTime.now
         )
       end
     end
@@ -55,16 +55,14 @@ class Crawler
   rescue Timeout::Error, Errno::ETIMEDOUT, Errno::ECONNREFUSED
     diff_in_seconds = (DateTime.now - package.revision) * 1.days unless package.revision.blank?
     # a week threshold
-    over_threshold = diff_in_seconds.nil? || diff_in_seconds > 604800
+    over_threshold = diff_in_seconds.nil? || diff_in_seconds > 604_800
 
-    if over_threshold
-      puts "Timeout Threshold! Error package #{package}"
-    end
+    puts "Timeout Threshold! Error package #{package}" if over_threshold
   rescue Exception => e
     puts "Caught #{e.class}"
     puts "Error package #{ware}"
     puts e.message
     puts e.backtrace.inspect
-    # TODO send mail, works over logentries atm
+    # TODO: send mail, works over logentries atm
   end
 end

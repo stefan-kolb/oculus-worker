@@ -8,17 +8,17 @@ require 'rest_client'
 # Since v2.0.0
 # http://groovy.codehaus.org/Version+Scheme
 class Groovy
-	def latest_stable
-    response = RestClient.get("https://www.versioneye.com/api/v2/products/java/org~codehaus~groovy:groovy?api_key=91780ca596c2e1906a9d")
+  def latest_stable
+    response = RestClient.get('https://www.versioneye.com/api/v2/products/java/org~codehaus~groovy:groovy?api_key=91780ca596c2e1906a9d')
     data = JSON.parse(response)
     data['version']
-	end
-	
-	def latest_unstable 
+  end
+
+  def latest_unstable
     'Not supported'
-	end
-	
-	def versions
+  end
+
+  def versions
     'Not supported'
-	end
+  end
 end

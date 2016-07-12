@@ -22,9 +22,7 @@ class Java
   private
 
   def download
-    open('http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html') do |stream|
-      stream.read
-    end
+    open('http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html', &:read)
   end
 
   def extract

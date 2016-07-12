@@ -1,6 +1,6 @@
 require 'open-uri'
 require 'zlib'
-require 'versioneye/models/language'
+# require 'versioneye/models/language'
 
 # RUBY
 # Source: https://github.com/ruby/ruby
@@ -12,8 +12,9 @@ class Ruby
   end
 
   def latest_stable
-    lng = Language.find_by(name: 'Ruby')
-    lng.stable_version = @versions.sort.reverse.first
+    # lng = Language.find_by(name: 'Ruby')
+    # lng.stable_version =
+    @versions.sort.reverse.first
   end
 
   def latest_unstable
@@ -37,7 +38,7 @@ class Ruby
     json.each do |tag|
       match = /v([0-9]+.[0-9]+.[0-9]+)(.[0-9]{3}|$)/.match(tag['name'])
       v, p = match.captures unless match.nil?
-      arr << ( v.gsub('_', '.') << p.gsub('_', 'p') unless p.nil? )
+      arr << (v.tr('_', '.') << p.tr('_', 'p') unless p.nil?)
     end
     arr = arr.compact.uniq
     @versions = arr.collect! { |e| Versionomy.parse(e) }

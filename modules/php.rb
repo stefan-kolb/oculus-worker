@@ -23,9 +23,7 @@ class Php
   private
 
   def download
-    open('http://php.net/downloads.php/') do |stream|
-      stream.read
-    end
+    open('http://php.net/downloads.php/', &:read)
   end
 
   def extract

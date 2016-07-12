@@ -22,9 +22,7 @@ class Python
   private
 
   def download
-    open('https://www.python.org/download/') do |stream|
-      stream.read
-    end
+    open('https://www.python.org/download/', &:read)
   end
 
   def extract

@@ -22,9 +22,7 @@ class Lua
   private
 
   def download
-    open('http://www.lua.org/ftp/') do |stream|
-      stream.read
-    end
+    open('http://www.lua.org/ftp/', &:read)
   end
 
   def extract

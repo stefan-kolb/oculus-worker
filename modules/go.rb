@@ -24,7 +24,7 @@ class Go
 
   private
 
-  def download page
+  def download(page)
     response = RestClient.get("https://api.github.com/repos/golang/go/tags?page=#{page}")
     JSON.parse(response)
   end
@@ -43,7 +43,7 @@ class Go
       end
       arr = arr.compact.uniq
       arr.collect! { |e| Versionomy.parse(e) }
-      @versions= @versions + arr
+      @versions+ = arr
     end
   end
 end

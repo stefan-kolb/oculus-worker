@@ -32,9 +32,7 @@ class Perl
   private
 
   def download
-    open('http://www.cpan.org/src/README.html') do |stream|
-      stream.read
-    end
+    open('http://www.cpan.org/src/README.html', &:read)
   end
 
   def extract
