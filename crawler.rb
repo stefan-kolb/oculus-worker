@@ -40,7 +40,7 @@ class Crawler
     else
       package = Language.where(name: ware)
 
-      if package.blank?
+      if package.exists?
         Language.create(
           name: ware,
           stable_version: result
