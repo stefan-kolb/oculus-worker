@@ -1,9 +1,10 @@
-FROM ruby:alpine
+FROM ruby:2.3.1
+
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
-ONBUILD COPY Gemfile /usr/src/app/
-ONBUILD RUN bundle install
+COPY Gemfile /usr/src/app/
+RUN bundle install
 
-ONBUILD COPY . /usr/src/app
+COPY . /usr/src/app
 CMD ["bundle exec rake crawler:all"]
