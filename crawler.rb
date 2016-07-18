@@ -40,23 +40,20 @@ class Crawler
     else
       package = Language.where(name: ware)
 
-      if package.exists?
+      unless package.exists?
         Language.create(
           name: ware,
           stable_version: result
-          # latest_version
-          # revision: DateTime.now
         )
       else
         package.update(
           stable_version: result
-          #revision: DateTime.now
         )
       end
     end
 
   rescue Timeout::Error, Errno::ETIMEDOUT, Errno::ECONNREFUSED
-    diff_in_seconds = (DateTime.now - package.revision) * 1.days unless package.revision.blank?
+    diff_in_seconds = (DateTime.now - package.updated_at) * 1.days unless package.updated_at.blank?
     # a week threshold
     over_threshold = diff_in_seconds.nil? || diff_in_seconds > 604_800
 
