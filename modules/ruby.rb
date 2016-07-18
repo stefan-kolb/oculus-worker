@@ -1,6 +1,8 @@
 require 'open-uri'
 require 'zlib'
 
+require_relative '../lib/github_repository'
+
 # RUBY
 # Source: https://github.com/ruby/ruby
 class Ruby
@@ -25,16 +27,11 @@ class Ruby
 
   private
 
-  def download
-    response = RestClient.get('https://api.github.com/repos/ruby/ruby/tags')
-    JSON.parse(response)
-  end
-
   def extract
-    json = download
+    tags = GithubRepository.new('ruby/ruby').tags
     arr = []
-    json.each do |tag|
-      match = /v([0-9]+.[0-9]+.[0-9]+)(.[0-9]{3}|$)/.match(tag['name'])
+    tags.each do |name|
+      match = /v([0-9]+.[0-9]+.[0-9]+)(.[0-9]{3}|$)/.match(name)
       v, p = match.captures unless match.nil?
       arr << (v.tr('_', '.') << p.tr('_', 'p') unless p.nil?)
     end

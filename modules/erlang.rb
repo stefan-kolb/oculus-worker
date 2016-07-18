@@ -1,8 +1,12 @@
 require 'versionomy'
 
+require_relative '../lib/github_repository'
+
 # ERLANG
-# Source: http://www.erlang.org/download/
+# Source: Github
 class Erlang
+  GITHUB_REPO = 'erlang/otp'
+
   @versions
 
   def initialize
@@ -23,17 +27,12 @@ class Erlang
 
   private
 
-  def download
-    response = RestClient.get('https://api.github.com/repos/erlang/otp/tags')
-    JSON.parse(response)
-  end
-
   def extract
-    json = download
+    tags = GithubRepository.new(GITHUB_REPO).tags
     arr = []
-    json.each do |tag|
-      match = /OTP-([0-9]+\.[0-9]+(\.[0-9]+)?(\.[0-9]+)?$)/.match(tag['name'])
-      v, p = match.captures unless match.nil?
+    tags.each do |name|
+      match = /OTP-([0-9]+\.[0-9]+(\.[0-9]+)?(\.[0-9]+)?$)/.match(name)
+      v, _p = match.captures unless match.nil?
       arr << v unless v.nil?
     end
     arr = arr.compact.uniq

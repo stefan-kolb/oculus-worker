@@ -1,3 +1,5 @@
+require_relative '../lib/github_repository'
+
 # PHP
 # Source: https://github.com/php/php-src
 class Php
@@ -22,16 +24,11 @@ class Php
 
   private
 
-  def download
-    response = RestClient.get('https://api.github.com/repos/php/php-src/tags')
-    JSON.parse(response)
-  end
-
   def extract
-    json = download
+    tags = GithubRepository.new('php/php-src').tags
     arr = []
-    json.each do |tag|
-      match = /^php-([0-9]+\.[0-9]+(\.[0-9]+)?$)/.match(tag['name'])
+    tags.each do |name|
+      match = /^php-([0-9]+\.[0-9]+(\.[0-9]+)?$)/.match(name)
       v, p = match.captures unless match.nil?
       arr << v unless v.nil?
     end
