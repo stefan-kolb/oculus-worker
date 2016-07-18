@@ -24,13 +24,19 @@ class Erlang
   private
 
   def download
-    open('http://www.erlang.org/download/', &:read)
+    response = RestClient.get('https://api.github.com/repos/erlang/otp/tags')
+    JSON.parse(response)
   end
 
   def extract
-    text = download
-    versions = text.scan /otp_src_([0-9]+\.[0-9]+(\.[0-9]+)?)\.tar\.gz/i
-    flat = versions.inject([]) { |arr, obj| arr << obj[0] }.compact.uniq
-    @versions = flat.collect! { |e| Versionomy.parse(e) }
+    json = download
+    arr = []
+    json.each do |tag|
+      match = /OTP-([0-9]+\.[0-9]+(\.[0-9]+)?(\.[0-9]+)?$)/.match(tag['name'])
+      v, p = match.captures unless match.nil?
+      arr << v unless v.nil?
+    end
+    arr = arr.compact.uniq
+    @versions = arr.collect! { |e| Versionomy.parse(e) }
   end
 end
