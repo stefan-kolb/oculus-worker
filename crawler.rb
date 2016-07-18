@@ -1,11 +1,12 @@
 require 'date'
 require 'mongoid'
-require 'require_all'
+
+require 'versioneye/models/language'
 
 require_relative 'config/openssl'
 require_relative 'models/runtime_version'
 
-require_all 'modules'
+require_relative 'modules/ruby'
 
 Mongoid.load!('config/mongoid.yml')
 
@@ -36,18 +37,19 @@ class Crawler
     if result.blank?
       raise "Empty version result for #{result.class.name}!"
     else
-      package = Profiles::RuntimeVersion.where(name: ware)
+      package = Language.where(name: ware)
 
       if package.blank?
-        Profiles::RuntimeVersion.create(
+        Language.create(
           name: ware,
-          version: result,
-          revision: DateTime.now
+          stable_version: result
+          # latest_version
+          # revision: DateTime.now
         )
       else
         package.update(
-          version: result,
-          revision: DateTime.now
+          stable_version: result
+          #revision: DateTime.now
         )
       end
     end

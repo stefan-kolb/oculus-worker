@@ -1,6 +1,5 @@
 require 'open-uri'
 require 'zlib'
-# require 'versioneye/models/language'
 
 # RUBY
 # Source: https://github.com/ruby/ruby
@@ -12,8 +11,6 @@ class Ruby
   end
 
   def latest_stable
-    # lng = Language.find_by(name: 'Ruby')
-    # lng.stable_version =
     @versions.sort.reverse.first
   end
 

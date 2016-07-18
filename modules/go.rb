@@ -43,7 +43,7 @@ class Go
       end
       arr = arr.compact.uniq
       arr.collect! { |e| Versionomy.parse(e) }
-      @versions+ = arr
+      @versions += arr
     end
   end
 end

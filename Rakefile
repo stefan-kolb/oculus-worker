@@ -4,6 +4,7 @@ require 'mongoid'
 require_relative 'models/runtime_version'
 require_relative 'crawler'
 
+# only bootstrap necessary dbs here so mongodb?!
 Mongoid.load!('config/mongoid.yml')
 Mongo::Logger.logger.level = ::Logger::INFO
 
