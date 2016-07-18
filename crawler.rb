@@ -1,12 +1,13 @@
 require 'date'
 require 'mongoid'
+require 'require_all'
 
+require 'versioneye-core'
 require 'versioneye/models/language'
 
 require_relative 'config/openssl'
-require_relative 'models/runtime_version'
 
-require_relative 'modules/ruby'
+require_all 'modules'
 
 Mongoid.load!('config/mongoid.yml')
 
@@ -26,7 +27,7 @@ class Crawler
     stop = Time.new
     time = stop - start
     puts 'Finished complete crawl!'
-    puts "Count: #{Profiles::RuntimeVersion.count}. Processing time was #{time}."
+    puts "Processing time was #{time}."
   end
 
   private

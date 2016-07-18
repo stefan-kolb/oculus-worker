@@ -15,6 +15,7 @@ class Ruby
   end
 
   def latest_unstable
+    # latest release _previewX or _rcX latest tag
     'Not supported'
   end
 
