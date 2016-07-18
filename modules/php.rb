@@ -1,6 +1,5 @@
 # PHP
-# Source: http://php.net/downloads.php
-# Old: http://php.net/releases/
+# Source: https://github.com/php/php-src
 class Php
   @versions
 
@@ -9,6 +8,7 @@ class Php
   end
 
   def latest_stable
+    # TODO: there are three stable versions 5.5, 5.6, 7.x
     @versions.sort.reverse.first
   end
 
@@ -23,13 +23,18 @@ class Php
   private
 
   def download
-    open('http://php.net/downloads.php/', &:read)
+    response = RestClient.get('https://api.github.com/repos/php/php-src/tags')
+    JSON.parse(response)
   end
 
   def extract
-    text = download
-    versions = text.scan /php-([0-9]+\.[0-9]+(\.[0-9]+)?)\.tar/i
-    flat = versions.inject([]) { |arr, obj| arr << obj[0] }.compact.uniq
-    @versions = flat.collect! { |e| Versionomy.parse(e) }
+    json = download
+    arr = []
+    json.each do |tag|
+      match = /^php-([0-9]+\.[0-9]+(\.[0-9]+)?$)/.match(tag['name'])
+      v, p = match.captures unless match.nil?
+      arr << v unless v.nil?
+    end
+    @versions = arr.collect! { |e| Versionomy.parse(e) }
   end
 end
