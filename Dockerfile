@@ -7,4 +7,7 @@ COPY Gemfile /usr/src/app/
 RUN bundle install
 
 COPY . /usr/src/app
-CMD ["bundle exec rake crawler:all"]
+
+ENV RACK_ENV=development
+
+CMD bundle exec rake crawler:all
