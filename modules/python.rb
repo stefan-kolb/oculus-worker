@@ -3,8 +3,6 @@ require 'open-uri'
 # PYTHON
 # Source: https://www.python.org/download/
 class Python
-  @versions
-
   def initialize
     extract
   end
@@ -29,7 +27,7 @@ class Python
 
   def extract
     text = download
-    versions = text.scan /python-([0-9]+\.[0-9]+(\.[0-9]+)?)\.tar/i
+    versions = text.scan(/python-([0-9]+\.[0-9]+(\.[0-9]+)?)\.tar/i)
     flat = versions.inject([]) { |arr, obj| arr << obj[0] }.compact.uniq
     @versions = flat.collect! { |e| Versionomy.parse(e) }
   end

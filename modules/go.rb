@@ -5,8 +5,6 @@ require_relative '../lib/github_repository'
 # GO
 # Source: Github
 class Go
-  @versions
-
   def initialize
     extract
   end

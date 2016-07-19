@@ -5,8 +5,6 @@ require_relative '../lib/github_repository'
 # ERLANG
 # Source: Github
 class Erlang
-  @versions
-
   def initialize
     extract
   end

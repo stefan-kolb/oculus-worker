@@ -7,8 +7,6 @@ require_relative '../lib/github_repository'
 # Maven central: http://central.maven.org/maven2/org/clojure/clojure/
 # Source: Versioneye
 class Clojure
-  @versions
-
   def initialize
     extract
   end

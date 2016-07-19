@@ -5,8 +5,6 @@ require_relative '../lib/github_repository'
 # PHP
 # Source: https://github.com/php/php-src
 class Php
-  @versions
-
   def initialize
     extract
   end
@@ -31,7 +29,7 @@ class Php
     arr = []
     tags.each do |name|
       match = /^php-([0-9]+\.[0-9]+(\.[0-9]+)?$)/.match(name)
-      v, p = match.captures unless match.nil?
+      v, _p = match.captures unless match.nil?
       arr << v unless v.nil?
     end
     @versions = arr.collect! { |e| Versionomy.parse(e) }

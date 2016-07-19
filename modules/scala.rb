@@ -7,8 +7,6 @@ require_relative '../lib/github_repository'
 # Source: Versioneye
 # Alt: http://www.scala-lang.org/download/all.html
 class Scala
-  @versions
-
   def initialize
     extract
   end

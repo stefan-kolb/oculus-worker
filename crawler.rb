@@ -12,13 +12,11 @@ require_all 'modules'
 Mongoid.load!('config/mongoid.yml')
 
 class Crawler
-  @parser
-
   def all
     puts 'Processing complete crawl...'
     start = Time.new
 
-    Dir['modules/*.rb'].each do |file|
+    Dir['modules/groovy.rb'].each do |file|
       file_name = File.basename(file, '.rb')
       @parser = file_name.camelcase.constantize.new
       crawl file_name
@@ -35,21 +33,21 @@ class Crawler
   def crawl(ware)
     result = @parser.latest_stable
 
-    if result.blank?
-      raise "Empty version result for #{result.class.name}!"
-    else
-      package = Language.where(name: ware)
+    raise "Empty version result for #{result.class.name}!" if result.blank?
 
-      unless package.exists?
-        Language.create(
-          name: ware,
-          stable_version: result
-        )
-      else
-        package.update(
-          stable_version: result
-        )
-      end
+    puts "#{ware}: Version #{result}"
+
+    package = Language.where(name: ware)
+
+    if !package.exists?
+      Language.create(
+        name: ware,
+        stable_version: result
+      )
+    else
+      package.update(
+        stable_version: result
+      )
     end
 
   rescue Timeout::Error, Errno::ETIMEDOUT, Errno::ECONNREFUSED
