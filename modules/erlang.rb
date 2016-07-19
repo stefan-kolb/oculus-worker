@@ -5,8 +5,6 @@ require_relative '../lib/github_repository'
 # ERLANG
 # Source: Github
 class Erlang
-  GITHUB_REPO = 'erlang/otp'
-
   @versions
 
   def initialize
@@ -28,7 +26,7 @@ class Erlang
   private
 
   def extract
-    tags = GithubRepository.new(GITHUB_REPO).tags
+    tags = GithubRepository.new('erlang', 'otp').tags
     arr = []
     tags.each do |name|
       match = /OTP-([0-9]+\.[0-9]+(\.[0-9]+)?(\.[0-9]+)?$)/.match(name)

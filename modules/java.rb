@@ -1,3 +1,5 @@
+require 'open-uri'
+
 # JAVA
 # Alt: http://en.wikipedia.org/wiki/Java_version_history
 class Java

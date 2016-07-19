@@ -1,13 +1,13 @@
 require 'json'
-require 'rest_client'
+require 'excon'
 
 # SCALA
 # Source: Versioneye
 # Alt: http://www.scala-lang.org/download/all.html
 class Scala
   def latest_stable
-    response = RestClient.get('https://www.versioneye.com/api/v2/products/java/org~scala-lang:scala-library?api_key=91780ca596c2e1906a9d')
-    data = JSON.parse(response)
+    response = Excon.get('https://www.versioneye.com/api/v2/products/java/org~scala-lang:scala-library?api_key=91780ca596c2e1906a9d')
+    data = JSON.parse(response.body)
     data['version']
   end
 

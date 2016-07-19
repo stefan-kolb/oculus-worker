@@ -1,3 +1,5 @@
+require 'open-uri'
+
 # PYTHON
 # Source: https://www.python.org/download/
 class Python

@@ -1,16 +1,19 @@
 require 'json'
-require 'rest-client'
+require 'octokit'
 
 class GithubRepository
 
-  def initialize(name)
-    @name = name
-    @api_url = "https://api.github.com/repos/#{name}"
+  def initialize(owner, repository)
+    @repo = "#{owner}/#{repository}"
+
+    # fetches all paginated entries
+    Octokit.auto_paginate = true
+    #@client = Octokit::Client.new :access_token => ENV['MY_PERSONAL_TOKEN']
+    @client = Octokit::Client.new
   end
 
   def tags
-    response = RestClient.get("#{@api_url}/tags")
-    json = JSON.parse(response)
-    json.collect { |entry| entry['name'] }
+    tags = Octokit.tags(@repo)
+    tags.collect { |tag| tag.name }
   end
 end

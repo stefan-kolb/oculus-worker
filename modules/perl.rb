@@ -1,4 +1,5 @@
 require 'versionomy'
+require 'open-uri'
 
 # PERL
 # Source: http://www.cpan.org/src/README.html

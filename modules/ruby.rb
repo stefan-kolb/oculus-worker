@@ -1,6 +1,3 @@
-require 'open-uri'
-require 'zlib'
-
 require_relative '../lib/github_repository'
 
 # RUBY
@@ -28,7 +25,7 @@ class Ruby
   private
 
   def extract
-    tags = GithubRepository.new('ruby/ruby').tags
+    tags = GithubRepository.new('ruby', 'ruby').tags
     arr = []
     tags.each do |name|
       match = /v([0-9]+.[0-9]+.[0-9]+)(.[0-9]{3}|$)/.match(name)

@@ -1,3 +1,6 @@
+require 'open-uri'
+require 'versionomy'
+
 # LUA
 # Source: http://www.lua.org/ftp/
 class Lua

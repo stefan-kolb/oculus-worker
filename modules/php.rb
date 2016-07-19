@@ -25,7 +25,7 @@ class Php
   private
 
   def extract
-    tags = GithubRepository.new('php/php-src').tags
+    tags = GithubRepository.new('php', 'php-src').tags
     arr = []
     tags.each do |name|
       match = /^php-([0-9]+\.[0-9]+(\.[0-9]+)?$)/.match(name)

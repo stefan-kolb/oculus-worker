@@ -1,5 +1,5 @@
 require 'json'
-require 'rest_client'
+require 'excon'
 
 # GROOVY
 # Source: Versioneye
@@ -9,8 +9,8 @@ require 'rest_client'
 # http://groovy.codehaus.org/Version+Scheme
 class Groovy
   def latest_stable
-    response = RestClient.get('https://www.versioneye.com/api/v2/products/java/org~codehaus~groovy:groovy?api_key=91780ca596c2e1906a9d')
-    data = JSON.parse(response)
+    response = Excon.get('https://www.versioneye.com/api/v2/products/java/org~codehaus~groovy:groovy?api_key=91780ca596c2e1906a9d')
+    data = JSON.parse(response.body)
     data['version']
   end
 
