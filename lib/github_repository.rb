@@ -16,7 +16,7 @@ class GithubRepository
   end
 
   def tags
-    tags = Octokit.tags(@repo)
+    tags = @client.tags(@repo)
     tags.collect(&:name)
   end
 end
