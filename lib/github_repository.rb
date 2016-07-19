@@ -8,8 +8,13 @@ class GithubRepository
 
     # fetches all paginated entries
     Octokit.auto_paginate = true
-    #@client = Octokit::Client.new :access_token => ENV['MY_PERSONAL_TOKEN']
-    @client = Octokit::Client.new
+    # use auth for higher rate limits ( 60/h vs 5000/h)
+    # see https://developer.github.com/v3/#rate-limiting
+    if ENV['GITHUB_ACCESS_TOKEN']
+      @client = Octokit::Client.new(access_token: ENV['GITHUB_ACCESS_TOKEN'])
+    else
+      @client = Octokit::Client.new
+    end
   end
 
   def tags
