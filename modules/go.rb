@@ -1,7 +1,9 @@
+require 'versionomy'
+
 require_relative '../lib/github_repository'
 
 # GO
-# Source: https://github.com/golang/go/
+# Source: Github
 class Go
   @versions
 

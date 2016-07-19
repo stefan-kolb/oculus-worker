@@ -28,9 +28,13 @@ class Ruby
     tags = GithubRepository.new('ruby', 'ruby').tags
     arr = []
     tags.each do |name|
-      match = /v([0-9]+.[0-9]+.[0-9]+)(.[0-9]{3}|$)/.match(name)
-      v, p = match.captures unless match.nil?
-      arr << (v.tr('_', '.') << p.tr('_', 'p') unless p.nil?)
+      match = /^v([0-9]+_[0-9]+_[0-9]+)(_[0-9]{3})?$/.match(name)
+      unless match.nil?
+        v, p = match.captures
+        v = v.tr('_', '.') unless v.nil?
+        v = v << p.tr('_', 'p') unless p.nil?
+        arr << v
+      end
     end
     arr = arr.compact.uniq
     @versions = arr.collect! { |e| Versionomy.parse(e) }

@@ -1,14 +1,20 @@
-require 'json'
-require 'excon'
+require 'versionomy'
+
+require_relative '../lib/github_repository'
 
 # SCALA
+# Source: Github
 # Source: Versioneye
 # Alt: http://www.scala-lang.org/download/all.html
 class Scala
+  @versions
+
+  def initialize
+    extract
+  end
+
   def latest_stable
-    response = Excon.get('https://www.versioneye.com/api/v2/products/java/org~scala-lang:scala-library?api_key=91780ca596c2e1906a9d')
-    data = JSON.parse(response.body)
-    data['version']
+    @versions.sort.reverse.first
   end
 
   def latest_unstable
@@ -16,6 +22,20 @@ class Scala
   end
 
   def versions
-    'Not supported'
+    @versions.sort.reverse
+  end
+
+  private
+
+  def extract
+    tags = GithubRepository.new('scala', 'scala').tags
+    arr = []
+    tags.each do |name|
+      match = /v([0-9]+\.[0-9]+(\.[0-9]+)?)$/.match(name)
+      v, _p = match.captures unless match.nil?
+      arr << v unless v.nil?
+    end
+    arr = arr.compact.uniq
+    @versions = arr.collect! { |e| Versionomy.parse(e) }
   end
 end
