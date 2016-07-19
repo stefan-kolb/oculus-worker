@@ -3,15 +3,16 @@ require 'excon'
 
 # GROOVY
 # Source: Versioneye
-# Alt: http://dist.codehaus.org/groovy/distributions/
 # Semantic versioning: [Y]
 # Since v2.0.0
 # http://groovy.codehaus.org/Version+Scheme
 class Groovy
+  def initialize
+    extract
+  end
+
   def latest_stable
-    response = Excon.get('https://www.versioneye.com/api/v2/products/java/org~codehaus~groovy:groovy?api_key=91780ca596c2e1906a9d')
-    data = JSON.parse(response.body)
-    data['version']
+    @versions.sort.reverse.first
   end
 
   def latest_unstable
@@ -19,6 +20,20 @@ class Groovy
   end
 
   def versions
-    'Not supported'
+    @versions.sort.reverse
+  end
+
+  private
+
+  def extract
+    tags = GithubRepository.new('apache', 'groovy').tags
+    arr = []
+    tags.each do |name|
+      match = /GROOVY_([0-9]+_[0-9]+(_[0-9]+)?)$/.match(name)
+      v, _p = match.captures unless match.nil?
+      arr << v.tr('_', '.') unless v.nil?
+    end
+    arr = arr.compact.uniq
+    @versions = arr.collect! { |e| Versionomy.parse(e) }
   end
 end

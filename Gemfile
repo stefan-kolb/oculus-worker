@@ -13,7 +13,7 @@ gem 'rake'
 gem 'octokit', '~> 4.0'
 
 group :development do
-  gem 'rubocop'
+  gem 'rubocop', require: false
 end
 
 group :test do
