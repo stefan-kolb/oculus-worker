@@ -1,8 +1,9 @@
 require 'versionomy'
-require 'open-uri'
+
+require_relative '../lib/github_repository'
 
 # PERL
-# Source: http://www.cpan.org/src/README.html
+# Source: Github
 # Version scheme:
 # Perl has used the following policy since the 5.6 release of Perl:
 # Maintenance branches (ready for production use) are even numbers (5.8, 5.10, 5.12 etc)
@@ -32,14 +33,16 @@ class Perl
 
   private
 
-  def download
-    open('http://www.cpan.org/src/README.html', &:read)
-  end
-
   def extract
-    text = download
-    versions = text.scan /perl-([0-9]+\.[0-9]+(\.[0-9]+)?)/i
-    flat = versions.inject([]) { |arr, obj| arr << obj[0] }.compact.uniq
+    tags = GithubRepository.new('perl', 'perl5').tags
+    arr = []
+    tags.each do |name|
+      # no RC candidates
+      match = /^v([0-9]+\.[0-9]+(\.[0-9]+)?)$/.match(name)
+      v, _p = match.captures unless match.nil?
+      arr << v unless v.nil?
+    end
+    flat = arr.compact.uniq
 
     @stable = flat.find_all { |e| /^[0-9]+\.\d*[02468](\.[0-9]+)?$/ =~ e }
     @unstable = flat.find_all { |e| /^[0-9]+\.\d*[13579](\.[0-9]+)?$/ =~ e }

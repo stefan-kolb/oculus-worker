@@ -1,3 +1,5 @@
+require 'versionomy'
+
 require_relative '../lib/github_repository'
 
 # PHP
