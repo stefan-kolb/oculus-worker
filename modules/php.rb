@@ -8,7 +8,7 @@ class Php
   attr_reader :name, :description
 
   def initialize
-    @name = Product::A_LANGUAGE_PHP #'PHP'
+    @name = Product::A_LANGUAGE_PHP # 'PHP'
     @description = ''
 
     extract

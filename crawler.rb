@@ -76,8 +76,8 @@ class Crawler
     @parser.versions.each { |v| product.add_version(v.to_s) }
 
     # TODO: do I need to create notifications on my own?
-    #CrawlerUtils.create_newest( product, package['version'], self.logger )
-    #CrawlerUtils.create_notifications( product, package['version'], self.logger )
+    # CrawlerUtils.create_newest( product, package['version'], self.logger )
+    # CrawlerUtils.create_notifications( product, package['version'], self.logger )
 
     product.save
   end

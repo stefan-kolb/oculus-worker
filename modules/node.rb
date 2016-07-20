@@ -6,7 +6,7 @@ class Node
   attr_reader :name, :description
 
   def initialize
-    @name = Product::A_LANGUAGE_NODEJS #'Node'
+    @name = Product::A_LANGUAGE_NODEJS # 'Node'
     @description = ''
     @conn = Excon.new('https://semver.io/')
   end

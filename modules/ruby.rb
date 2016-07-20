@@ -6,7 +6,7 @@ class Ruby
   attr_reader :name, :description
 
   def initialize
-    @name = Product::A_LANGUAGE_RUBY #'Ruby'
+    @name = Product::A_LANGUAGE_RUBY # 'Ruby'
     @description = 'The Ruby MRI runtime.'
 
     extract
