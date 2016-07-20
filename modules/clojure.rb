@@ -7,7 +7,12 @@ require_relative '../lib/github_repository'
 # Maven central: http://central.maven.org/maven2/org/clojure/clojure/
 # Source: Versioneye
 class Clojure
+  attr_reader :name, :description
+
   def initialize
+    @name = 'Clojure'
+    @description = ''
+
     extract
   end
 

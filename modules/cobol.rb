@@ -1,5 +1,12 @@
 # COBOL
 class Cobol
+  attr_reader :name, :description
+
+  def initialize
+    @name = 'COBOL'
+    @description = ''
+  end
+
   def latest_stable
     '2014'
   end

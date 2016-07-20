@@ -3,7 +3,12 @@ require_relative '../lib/github_repository'
 # RUBY
 # Source: https://github.com/ruby/ruby
 class Ruby
+  attr_reader :name, :description
+
   def initialize
+    @name = Product::A_LANGUAGE_RUBY #'Ruby'
+    @description = 'The Ruby MRI runtime.'
+
     extract
   end
 
@@ -18,24 +23,6 @@ class Ruby
 
   def versions
     @versions.sort.reverse
-  end
-
-  def product
-    prod = Product.new(
-      # mandatory
-      name: 'Ruby',
-      language: 'C',
-      prod_type: '???no package manager/github?',
-      prod_key: '???',
-
-      version: latest_stable,
-      description: 'Ruby is the interpreted scripting language for quick and easy object-oriented programming. It has many features to process text files and to do system management tasks (as in Perl). It is simple, straight-forward, and extensible.',
-      #licence: 'BSD-2-Clause'
-    )
-
-    @versions.each { |v| prod.add_version(v.to_s) }
-
-    prod
   end
 
   private

@@ -4,7 +4,12 @@ require 'versionomy'
 # LUA
 # Source: http://www.lua.org/ftp/
 class Lua
+  attr_reader :name, :description
+
   def initialize
+    @name = 'Lua'
+    @description = ''
+
     extract
   end
 

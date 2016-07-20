@@ -1,6 +1,13 @@
 # DOTNET
 # Source: http://msdn.microsoft.com/en-us/library/bb822049%28v=vs.110%29.aspx
 class Dotnet
+  attr_reader :name, :description
+
+  def initialize
+    @name = 'CSharp'
+    @description = ''
+  end
+
   def latest_stable
     '4.5.2'
   end

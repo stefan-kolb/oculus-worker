@@ -5,7 +5,12 @@ require_relative '../lib/github_repository'
 # ERLANG
 # Source: Github
 class Erlang
+  attr_reader :name, :description
+
   def initialize
+    @name = 'Erlang'
+    @description = ''
+
     extract
   end
 

@@ -7,7 +7,12 @@ require 'excon'
 # Since v2.0.0
 # http://groovy.codehaus.org/Version+Scheme
 class Groovy
+  attr_reader :name, :description
+
   def initialize
+    @name = 'Groovy'
+    @description = ''
+
     extract
   end
 

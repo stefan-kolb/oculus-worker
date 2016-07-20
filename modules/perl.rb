@@ -11,7 +11,12 @@ require_relative '../lib/github_repository'
 # Development branches are odd numbers (5.9, 5.11, 5.13 etc)
 # RC (release candidates) leading up to a maintenance branch are called testing release
 class Perl
+  attr_reader :name, :description
+
   def initialize
+    @name = 'Perl'
+    @description = ''
+
     extract
   end
 

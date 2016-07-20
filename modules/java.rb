@@ -3,7 +3,12 @@ require 'open-uri'
 # JAVA
 # Alt: http://en.wikipedia.org/wiki/Java_version_history
 class Java
+  attr_reader :name, :description
+
   def initialize
+    @name = 'Java'
+    @description = ''
+
     extract
   end
 
@@ -15,8 +20,9 @@ class Java
     'Not supported'
   end
 
+  # not supported
   def versions
-    'Not supported'
+    []
   end
 
   private

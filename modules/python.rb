@@ -3,7 +3,12 @@ require 'open-uri'
 # PYTHON
 # Source: https://www.python.org/download/
 class Python
+  attr_reader :name, :description
+
   def initialize
+    @name = 'Python'
+    @description = ''
+
     extract
   end
 
@@ -16,7 +21,7 @@ class Python
   end
 
   def versions
-    'Not supported'
+    @versions.sort.reverse
   end
 
   private

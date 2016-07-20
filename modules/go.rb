@@ -5,7 +5,12 @@ require_relative '../lib/github_repository'
 # GO
 # Source: Github
 class Go
+  attr_reader :name, :description
+
   def initialize
+    @name = 'Go'
+    @description = ''
+
     extract
   end
 

@@ -7,7 +7,12 @@ require_relative '../lib/github_repository'
 # Source: Versioneye
 # Alt: http://www.scala-lang.org/download/all.html
 class Scala
+  attr_reader :name, :description
+
   def initialize
+    @name = 'Scala'
+    @description = ''
+
     extract
   end
 

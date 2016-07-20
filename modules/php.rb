@@ -5,7 +5,12 @@ require_relative '../lib/github_repository'
 # PHP
 # Source: https://github.com/php/php-src
 class Php
+  attr_reader :name, :description
+
   def initialize
+    @name = Product::A_LANGUAGE_PHP #'PHP'
+    @description = ''
+
     extract
   end
 
@@ -19,7 +24,7 @@ class Php
   end
 
   def versions
-    'Not supported'
+    @versions.sort.reverse
   end
 
   private
