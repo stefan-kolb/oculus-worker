@@ -1,21 +1,44 @@
-require 'json'
-require 'rest_client'
+require 'versionomy'
+
+require_relative '../lib/github_repository'
 
 # CLOJURE
+# Source: Github
 # Maven central: http://central.maven.org/maven2/org/clojure/clojure/
 # Source: Versioneye
 class Clojure
-	def latest_stable
-    response = RestClient.get("https://www.versioneye.com/api/v2/products/java/org~clojure:clojure?api_key=91780ca596c2e1906a9d")
-    data = JSON.parse(response)
-    data['version']
+  attr_reader :name, :description
+
+  def initialize
+    @name = 'Clojure'
+    @description = 'The JVM-based Clojure programming language.'
+
+    extract
   end
-	
-	def latest_unstable 
+
+  def latest_stable
+    @versions.sort.reverse.first
+  end
+
+  def latest_unstable
     'Not supported'
-	end
-	
-	def versions
-    'Not supported'
+  end
+
+  def versions
+    @versions.sort.reverse
+  end
+
+  private
+
+  def extract
+    tags = GithubRepository.new('clojure', 'clojure').tags
+    arr = []
+    tags.each do |name|
+      match = /clojure-([0-9]+\.[0-9]+(\.[0-9]+)?)$/.match(name)
+      v, _p = match.captures unless match.nil?
+      arr << v unless v.nil?
+    end
+    arr = arr.compact.uniq
+    @versions = arr.collect! { |e| Versionomy.parse(e) }
   end
 end

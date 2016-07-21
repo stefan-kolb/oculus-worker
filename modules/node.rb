@@ -1,18 +1,25 @@
-require 'rest_client'
+require 'excon'
 
 # NODE
 # Source: http://semver.io
-# Alt: http://nodejs.org/dist/
 class Node
-	def latest_stable
-		RestClient.get('https://semver.io/node/stable')
-	end
-	
-	def latest_unstable 
-		RestClient.get('https://semver.io/node/unstable')
-	end
-	
-	def versions
-		RestClient.get('https://semver.io/node/versions').split("\n")
-	end
+  attr_reader :name, :description
+
+  def initialize
+    @name = Product::A_LANGUAGE_NODEJS # 'Node'
+    @description = 'Node.js is a JavaScript runtime built on Chrome\'s V8 JavaScript engine.'
+    @conn = Excon.new('https://semver.io/')
+  end
+
+  def latest_stable
+    @conn.get(path: '/node/stable').body
+  end
+
+  def latest_unstable
+    @conn.get(path: '/node/unstable').body
+  end
+
+  def versions
+    @conn.get(path: '/node/versions').body.split("\n")
+  end
 end
