@@ -15,7 +15,7 @@ class Perl
 
   def initialize
     @name = 'Perl'
-    @description = ''
+    @description = 'The Perl 5 language interpreter.'
 
     extract
   end

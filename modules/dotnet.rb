@@ -4,7 +4,7 @@ class Dotnet
   attr_reader :name, :description
 
   def initialize
-    @name = 'CSharp'
+    @name = Product::A_LANGUAGE_CSHARP #'Dotnet?'
     @description = ''
   end
 

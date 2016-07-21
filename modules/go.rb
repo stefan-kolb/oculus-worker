@@ -9,7 +9,7 @@ class Go
 
   def initialize
     @name = 'Go'
-    @description = ''
+    @description = 'Go is an open source programming language that makes it easy to build simple, reliable, and efficient software.'
 
     extract
   end

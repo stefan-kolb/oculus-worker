@@ -7,7 +7,7 @@ class Node
 
   def initialize
     @name = Product::A_LANGUAGE_NODEJS # 'Node'
-    @description = ''
+    @description = 'Node.js is a JavaScript runtime built on Chrome\'s V8 JavaScript engine.'
     @conn = Excon.new('https://semver.io/')
   end
 

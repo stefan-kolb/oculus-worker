@@ -8,7 +8,7 @@ class Lua
 
   def initialize
     @name = 'Lua'
-    @description = ''
+    @description = 'The Lua programming language.'
 
     extract
   end

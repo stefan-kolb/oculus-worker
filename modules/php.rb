@@ -9,7 +9,7 @@ class Php
 
   def initialize
     @name = Product::A_LANGUAGE_PHP # 'PHP'
-    @description = ''
+    @description = 'The PHP Interpreter.'
 
     extract
   end

@@ -7,7 +7,7 @@ class Python
 
   def initialize
     @name = 'Python'
-    @description = ''
+    @description = 'The Python programming language.'
 
     extract
   end

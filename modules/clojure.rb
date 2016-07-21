@@ -11,7 +11,7 @@ class Clojure
 
   def initialize
     @name = 'Clojure'
-    @description = ''
+    @description = 'The JVM-based Clojure programming language.'
 
     extract
   end

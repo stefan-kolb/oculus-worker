@@ -7,7 +7,7 @@ class Java
 
   def initialize
     @name = 'Java'
-    @description = ''
+    @description = 'The Java programming language.'
 
     extract
   end

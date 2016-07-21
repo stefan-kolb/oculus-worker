@@ -4,10 +4,9 @@ Ruby crawler to track language runtimes.
 
 Currently supported runtimes are:
 - Clojure
-- COBOL
 - Dart
 - Dotnet
-- erlang
+- Erlang
 - Go
 - Groovy
 - Java

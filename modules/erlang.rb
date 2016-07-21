@@ -9,7 +9,8 @@ class Erlang
 
   def initialize
     @name = 'Erlang'
-    @description = ''
+    @description = 'Erlang is a programming language used to build massively scalable soft real-time systems with requirements on high availability.' \
+    ' OTP is set of Erlang libraries and design principles providing middle-ware to develop these systems.'
 
     extract
   end

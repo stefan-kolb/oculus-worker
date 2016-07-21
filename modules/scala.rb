@@ -11,7 +11,7 @@ class Scala
 
   def initialize
     @name = 'Scala'
-    @description = ''
+    @description = 'The Scala programming language.'
 
     extract
   end
