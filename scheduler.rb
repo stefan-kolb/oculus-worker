@@ -9,7 +9,7 @@ scheduler = Rufus::Scheduler.new
 
 # once a day 7 am
 scheduler.cron '0 7 * * *' do
-	Crawler.new.all
+  Crawler.new.all
 end
 
 scheduler.join

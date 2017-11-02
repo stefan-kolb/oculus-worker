@@ -10,6 +10,6 @@ module Profiles
     # validation
     validates :name, presence: true
     validates :revision, presence: true
-    validates :version, presence: true #, format: { with: /http[s]?:\/\/.*/ }
+    validates :version, presence: true # , format: { with: /http[s]?:\/\/.*/ }
   end
 end

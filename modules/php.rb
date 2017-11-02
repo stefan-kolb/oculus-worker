@@ -1,14 +1,21 @@
+require 'versionomy'
+
+require_relative '../lib/github_repository'
+
 # PHP
-# Source: http://php.net/downloads.php
-# Old: http://php.net/releases/
+# Source: https://github.com/php/php-src
 class Php
-  @versions
+  attr_reader :name, :description
 
   def initialize
+    @name = 'PHP'
+    @description = 'The PHP Interpreter.'
+
     extract
   end
 
   def latest_stable
+    # TODO: there are three stable versions 5.5, 5.6, 7.x
     @versions.sort.reverse.first
   end
 
@@ -17,21 +24,19 @@ class Php
   end
 
   def versions
-    'Not supported'
+    @versions.sort.reverse
   end
 
   private
 
-  def download
-    open('http://php.net/downloads.php/') do |stream|
-      stream.read
-    end
-  end
-
   def extract
-    text = download
-    versions = text.scan /php-([0-9]+\.[0-9]+(\.[0-9]+)?)\.tar/i
-    flat = versions.inject([]) { |arr, obj| arr << obj[0] }.compact.uniq
-    @versions = flat.collect! { |e| Versionomy.parse(e) }
+    tags = GithubRepository.new('php', 'php-src').tags
+    arr = []
+    tags.each do |name|
+      match = /^php-([0-9]+\.[0-9]+(\.[0-9]+)?$)/.match(name)
+      v, _p = match.captures unless match.nil?
+      arr << v unless v.nil?
+    end
+    @versions = arr.collect! { |e| Versionomy.parse(e) }
   end
 end

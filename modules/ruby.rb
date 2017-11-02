@@ -1,12 +1,14 @@
-require 'open-uri'
-require 'zlib'
+require_relative '../lib/github_repository'
 
 # RUBY
 # Source: https://github.com/ruby/ruby
 class Ruby
-  @versions
+  attr_reader :name, :description
 
   def initialize
+    @name = 'Ruby'
+    @description = 'The Ruby MRI runtime.'
+
     extract
   end
 
@@ -15,6 +17,7 @@ class Ruby
   end
 
   def latest_unstable
+    # latest release _previewX or _rcX latest tag
     'Not supported'
   end
 
@@ -24,18 +27,16 @@ class Ruby
 
   private
 
-  def download
-    response = RestClient.get('https://api.github.com/repos/ruby/ruby/tags')
-    JSON.parse(response)
-  end
-
   def extract
-    json = download
+    tags = GithubRepository.new('ruby', 'ruby').tags
     arr = []
-    json.each do |tag|
-      match = /v([0-9]+.[0-9]+.[0-9]+)(.[0-9]{3}|$)/.match(tag['name'])
-      v, p = match.captures unless match.nil?
-      arr << ( v.gsub('_', '.') << p.gsub('_', 'p') unless p.nil? )
+    tags.each do |name|
+      match = /^v([0-9]+_[0-9]+_[0-9]+)(_[0-9]{3})?$/.match(name)
+      next if match.nil?
+      v, p = match.captures
+      v = v.tr('_', '.') unless v.nil?
+      v = v << p.tr('_', 'p') unless p.nil?
+      arr << v
     end
     arr = arr.compact.uniq
     @versions = arr.collect! { |e| Versionomy.parse(e) }

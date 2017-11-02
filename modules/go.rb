@@ -1,12 +1,16 @@
-require 'open-uri'
+require 'versionomy'
+
+require_relative '../lib/github_repository'
 
 # GO
-# Source: https://github.com/golang/go/
+# Source: Github
 class Go
-  @versions
+  attr_reader :name, :description
 
   def initialize
-    @versions = []
+    @name = 'Go'
+    @description = 'Go is an open source programming language that makes it easy to build simple, reliable, and efficient software.'
+
     extract
   end
 
@@ -24,26 +28,15 @@ class Go
 
   private
 
-  def download page
-    response = RestClient.get("https://api.github.com/repos/golang/go/tags?page=#{page}")
-    JSON.parse(response)
-  end
-
   def extract
-    (1..10).each do |i|
-      json = download i
-
-      break if json.empty?
-
-      arr = []
-      json.each do |tag|
-        match = /go([0-9]+\.[0-9]+(\.[0-9]+)?)$/.match(tag['name'])
-        v, p = match.captures unless match.nil?
-        arr << v
-      end
-      arr = arr.compact.uniq
-      arr.collect! { |e| Versionomy.parse(e) }
-      @versions= @versions + arr
+    tags = GithubRepository.new('golang', 'go').tags
+    arr = []
+    tags.each do |name|
+      match = /go([0-9]+\.[0-9]+(\.[0-9]+)?)$/.match(name)
+      v, _p = match.captures unless match.nil?
+      arr << v unless v.nil?
     end
+    arr = arr.compact.uniq
+    @versions = arr.collect! { |e| Versionomy.parse(e) }
   end
 end

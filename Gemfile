@@ -3,11 +3,16 @@ source 'https://rubygems.org'
 ruby '2.3.3'
 
 gem 'mongoid', '~> 5.0'
-gem 'rufus-scheduler'
+gem 'octokit', '~> 4.0'
+gem 'rake'
 gem 'require_all'
 gem 'rest-client'
+gem 'rufus-scheduler'
 gem 'versionomy'
-gem 'rake'
+
+group :development do
+  gem 'rubocop', require: false
+end
 
 group :test do
   gem 'minitest'

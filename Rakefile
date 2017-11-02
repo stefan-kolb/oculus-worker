@@ -10,12 +10,10 @@ Mongo::Logger.logger.level = ::Logger::INFO
 
 # crawling
 namespace :crawler do
-
   desc 'Crawls all runtimes'
   task :all do
     Crawler.new.all
   end
-
 end
 
 # tests
@@ -25,4 +23,4 @@ Rake::TestTask.new do |t|
   t.test_files = FileList['test/**/test*.rb']
 end
 
-task :default => [:test]
+task default: [:test]
