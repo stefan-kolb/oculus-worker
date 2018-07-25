@@ -28,12 +28,12 @@ class Java
   private
 
   def download
-    open('http://www.oracle.com/technetwork/java/javase/downloads/jdk10-downloads-4416644.html', &:read)
+    open('https://en.wikipedia.org/wiki/Java_version_history', &:read)
   end
 
   def extract
     text = download
-    versions = text.scan(/java\sSE\sDevelopment\sKit\s([0-9]+.[0-9]+.[0-9]+)/i)
+    versions = text.scan(/java\sSE\s([0-9]+.[0-9]+.[0-9]+)/i)
     flat = versions.inject([]) { |arr, obj| arr << obj[0] }.compact.uniq
     @versions = flat.collect! { |e| Versionomy.parse(e) }
   end
