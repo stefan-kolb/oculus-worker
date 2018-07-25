@@ -1,5 +1,4 @@
 require 'json'
-require 'excon'
 
 # GROOVY
 # Source: Versioneye
