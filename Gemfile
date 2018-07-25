@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.3.3'
+ruby '2.4.2'
 
 gem 'mongoid', '~> 5.0'
 gem 'octokit', '~> 4.0'

@@ -1,4 +1,4 @@
-require 'excon'
+require 'rest-client'
 
 # NODE
 # Source: http://semver.io
@@ -8,18 +8,17 @@ class Node
   def initialize
     @name = 'Node'
     @description = 'Node.js is a JavaScript runtime built on Chrome\'s V8 JavaScript engine.'
-    @conn = Excon.new('https://semver.io/')
   end
 
   def latest_stable
-    @conn.get(path: '/node/stable').body
+    RestClient.get('https://semver.io/node/stable')
   end
 
   def latest_unstable
-    @conn.get(path: '/node/unstable').body
+    RestClient.get( 'https://semver.io/node/unstable')
   end
 
   def versions
-    @conn.get(path: '/node/versions').body.split("\n")
+    RestClient.get( 'https://semver.io/node/versions').split("\n")
   end
 end
