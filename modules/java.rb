@@ -28,14 +28,13 @@ class Java
   private
 
   def download
-    open('http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html', &:read)
+    open('http://www.oracle.com/technetwork/java/javase/downloads/jdk10-downloads-4416644.html', &:read)
   end
 
   def extract
     text = download
-    versions = text.scan(/java\sSE\sDevelopment\sKit\s([0-9]+u[0-9]+)/i)
+    versions = text.scan(/java\sSE\sDevelopment\sKit\s([0-9]+.[0-9]+.[0-9]+)/i)
     flat = versions.inject([]) { |arr, obj| arr << obj[0] }.compact.uniq
-    flat.collect! { |e| '1.' << e.split('u')[0] << '.0_' << e.split('u')[1] }
     @versions = flat.collect! { |e| Versionomy.parse(e) }
   end
 end
