@@ -1,9 +1,9 @@
 source 'https://rubygems.org'
 
-ruby '2.4.2'
+ruby '2.6.6'
 
-gem 'mongoid', '~> 5.0'
-gem 'octokit', '~> 4.0'
+gem 'mongoid'
+gem 'octokit'
 gem 'rake'
 gem 'require_all'
 gem 'rest-client'
