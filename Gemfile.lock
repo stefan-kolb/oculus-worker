@@ -54,6 +54,11 @@ GEM
     rake (13.0.1)
     regexp_parser (1.8.2)
     require_all (3.0.0)
+    rest-client (2.1.0)
+      http-accept (>= 1.7.0, < 2.0)
+      http-cookie (>= 1.0.2, < 2.0)
+      mime-types (>= 1.16, < 4.0)
+      netrc (~> 0.8)
     rest-client (2.1.0-x64-mingw32)
       ffi (~> 1.9)
       http-accept (>= 1.7.0, < 2.0)
@@ -85,10 +90,11 @@ GEM
       addressable (>= 2.3.5)
       faraday (> 0.8, < 2.0)
     thread_safe (0.3.6)
-    tzinfo (1.2.7)
+    tzinfo (1.2.10)
       thread_safe (~> 0.1)
     unf (0.1.4)
       unf_ext
+    unf_ext (0.0.7.7)
     unf_ext (0.0.7.7-x64-mingw32)
     unf_ext (0.0.7.7-x86-mingw32)
     unicode-display_width (1.7.0)
@@ -97,6 +103,7 @@ GEM
     zeitwerk (2.4.0)
 
 PLATFORMS
+  ruby
   x64-mingw32
   x86-mingw32
 
